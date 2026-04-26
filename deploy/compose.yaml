@@ -1,0 +1,7 @@
+services:
+  swe304-app:
+    image: yigitseker/swe304project3:latest
+    container_name: swe304project3-container
+    ports:
+      - "80:8080"
+    restart: always
