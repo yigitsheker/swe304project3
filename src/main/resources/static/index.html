@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SWE304 School Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>SWE304 School Management</h1>
+    <p>Advisers - Studies - Supervisions CRUD Application</p>
+</header>
+
+<main>
+
+    <section class="card">
+        <h2>Advisers</h2>
+
+        <div class="form-row">
+            <input type="text" id="adviserName" placeholder="Adviser name">
+            <input type="text" id="adviserDepartment" placeholder="Department">
+            <button id="adviserSubmitButton" onclick="submitAdviser()">Add Adviser</button>
+            <button class="cancel" onclick="cancelAdviserEdit()">Cancel</button>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="adviserTable"></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Studies</h2>
+
+        <div class="form-row">
+            <input type="text" id="studyTitle" placeholder="Study title">
+            <input type="text" id="studyDescription" placeholder="Description">
+            <button id="studySubmitButton" onclick="submitStudy()">Add Study</button>
+            <button class="cancel" onclick="cancelStudyEdit()">Cancel</button>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="studyTable"></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Supervisions</h2>
+
+        <div class="form-row">
+            <input type="number" id="supervisionAdviserId" placeholder="Adviser ID">
+            <input type="number" id="supervisionStudyId" placeholder="Study ID">
+            <input type="text" id="supervisionStudent" placeholder="Student">
+            <input type="text" id="supervisionPerformance" placeholder="Performance">
+            <button id="supervisionSubmitButton" onclick="submitSupervision()">Add Supervision</button>
+            <button class="cancel" onclick="cancelSupervisionEdit()">Cancel</button>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Adviser</th>
+                <th>Study</th>
+                <th>Student</th>
+                <th>Performance</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="supervisionTable"></tbody>
+        </table>
+    </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
