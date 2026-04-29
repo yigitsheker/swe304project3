@@ -52,17 +52,33 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key.pem
           chmod 600 ~/.ssh/ec2_key.pem
-          ls -la ~/.ssh
 
       - name: Create deployment directory on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" "mkdir -p /home/ubuntu/swe304project3-deploy"
+          ssh -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              -i ~/.ssh/ec2_key.pem \
+              "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" \
+              "mkdir -p /home/ubuntu/swe304project3-deploy"
 
       - name: Copy deployment files to EC2
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem deploy/compose.yml "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/swe304project3-deploy/compose.yml"
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem deploy/deploy.sh "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/swe304project3-deploy/deploy.sh"
+          scp -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              -i ~/.ssh/ec2_key.pem \
+              deploy/compose.yml \
+              "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/swe304project3-deploy/compose.yml"
+
+          scp -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              -i ~/.ssh/ec2_key.pem \
+              deploy/deploy.sh \
+              "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/swe304project3-deploy/deploy.sh"
 
       - name: Run deployment script on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key.pem "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" "chmod +x /home/ubuntu/swe304project3-deploy/deploy.sh && /home/ubuntu/swe304project3-deploy/deploy.sh"
+          ssh -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              -i ~/.ssh/ec2_key.pem \
+              "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" \
+              "chmod +x /home/ubuntu/swe304project3-deploy/deploy.sh && /home/ubuntu/swe304project3-deploy/deploy.sh"
